@@ -13,8 +13,13 @@ function main() {
 
     const example_text = "The quick brown fox jumps over the lazy dog"
     
-    const timer = document.createElement('div')
-    const wpm = document.createElement('div')
+    const timer_label = document.createElement('label')
+    timer_label.textContent = 'Time: '
+    const timer = document.createElement('label')
+
+    const wpm_label = document.createElement('label')
+    wpm_label.textContent = 'Words per Minute: '
+    const wpm = document.createElement('label')
 
     const total_words = text.split(' ').length
     let current_words = 0
@@ -80,7 +85,10 @@ function main() {
             current_letter = current_child.textContent
         }
     }
+    document.body.appendChild(timer_label)
     document.body.appendChild(timer)
+    document.body.appendChild(document.createElement('br'))
+    document.body.appendChild(wpm_label)
     document.body.appendChild(wpm)
 }
   
