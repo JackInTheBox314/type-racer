@@ -1,7 +1,7 @@
 function main() {
-    // TODO: add code here
-    // to generate random number between 1 - 6:
-    // Math.floor(Math.random() * 6) + 1
+    // ideas: upload pdf as prompts for race
+    // implement socket io for online play
+    // decorate
   
 
     const example_texts = [
@@ -13,13 +13,15 @@ function main() {
 
     const example_text = "The quick brown fox jumps over the lazy dog"
     
-    const timer_label = document.createElement('label')
-    timer_label.textContent = 'Time: '
-    const timer = document.createElement('label')
+    const input_box = document.querySelector('.input_box')
 
-    const wpm_label = document.createElement('label')
+    const timer_label = document.querySelector('.timer_label')
+    timer_label.textContent = 'Time: '
+    const timer = document.querySelector('.timer')
+
+    const wpm_label = document.querySelector('.wpm_label')
     wpm_label.textContent = 'Words per Minute: '
-    const wpm = document.createElement('label')
+    const wpm = document.querySelector('.wpm')
 
     const total_words = text.split(' ').length
     let current_words = 0
@@ -37,7 +39,7 @@ function main() {
     }
 
 
-    const textarea = document.createElement('div')
+    const textarea = document.querySelector('.textarea')
     document.body.appendChild(textarea)
 
     for (const char of example_text){
@@ -51,18 +53,19 @@ function main() {
     current_child.className = 'current'
     let current_letter = current_child.textContent
 
-    window.addEventListener('keydown', handleKeyDown)
+    input_box.addEventListener('input', handleInput)
 
-    function handleKeyDown(evt) {
-        // console.log(evt)
-        if (evt.key.length === 1 && /^[a-zA-Z ,.?!"':;/-]+$/.test(evt.key)){
-            if (evt.key === current_letter) {
+    function handleInput(evt) {
+        console.log(evt)
+        if (evt.data){
+            if (evt.data === current_letter) {
                 if (!handleKeyDown.didrun){ 
                     startTimer();
                     handleKeyDown.didrun = true;
                 }
-                if (evt.key === ' ') {
+                if (evt.data === ' ') {
                     current_words += 1
+                    input_box.value = ''
                 }
                 current_child.className = 'past'
                 if (current_child.nextSibling) {
@@ -72,19 +75,20 @@ function main() {
                 } else {
                     clearInterval(intervalId)
                     current_words += 1
+                    input_box.value = ''
                     console.log('You Win')
-                    window.removeEventListener('keydown', handleKeyDown)
-                    window.removeEventListener
+                    input_box.removeEventListener('keydown', handleKeyDown)
                 }
             } else {
                 current_child.classList.add('error')
             }
-        } else if (evt.key === 'Backspace' && current_child.classList.contains('error')) {
+        } else if (evt.data === null && current_child.classList.contains('error')) {
             current_child.removeAttribute('class')
             current_child.className = 'current'
             current_letter = current_child.textContent
         }
     }
+    document.body.appendChild(input_box)
     document.body.appendChild(timer_label)
     document.body.appendChild(timer)
     document.body.appendChild(document.createElement('br'))
