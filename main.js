@@ -16,11 +16,9 @@ function main() {
     const input_box = document.querySelector('.input_box')
 
     const timer_label = document.querySelector('.timer_label')
-    timer_label.textContent = 'Time: '
     const timer = document.querySelector('.timer')
 
     const wpm_label = document.querySelector('.wpm_label')
-    wpm_label.textContent = 'Words per Minute: '
     const wpm = document.querySelector('.wpm')
 
     const total_words = text.split(' ').length
@@ -59,9 +57,9 @@ function main() {
         console.log(evt)
         if (evt.data){
             if (evt.data === current_letter) {
-                if (!handleKeyDown.didrun){ 
+                if (!handleInput.didrun){ 
                     startTimer();
-                    handleKeyDown.didrun = true;
+                    handleInput.didrun = true;
                 }
                 if (evt.data === ' ') {
                     current_words += 1
@@ -77,7 +75,7 @@ function main() {
                     current_words += 1
                     input_box.value = ''
                     console.log('You Win')
-                    input_box.removeEventListener('keydown', handleKeyDown)
+                    input_box.removeEventListener('keydown', handleInput)
                 }
             } else {
                 current_child.classList.add('error')
