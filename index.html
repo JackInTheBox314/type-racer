@@ -7,31 +7,147 @@
 </head>
 <body>
     <style>
-        body {
-            font-family: 'Courier New', Courier, monospace
+        * {
+            font-family: 'Courier New', Courier, monospace;
         }
 
-        .input_box {
+        body {
+            background: black;
+            color: white;
+        }
+
+        h1.top {
+            top: 0;
+            left: 50%;
+            position: absolute;
+            transition: 0.5s ease-in-out;
+            transform: translateX(-50%);
+            font-weight: normal;
+        }
+
+        div.main {
+            margin-top: 60px;
+        }
+
+        div.textarea {
+            margin-top: 10px;
+            text-align: center;
+        }
+
+        input.input_box {
+            margin: 10px auto;
             display: block;
         }
 
+        div.time-labels, .wpm-labels, .acc-labels{
+            text-align: center;
+        }
+
         .current {
-            background-color: rgb(186, 213, 249);
+            background-color: rgb(75, 102, 135);
         }
 
         .error {
-            background-color: rgb(255, 149, 126);
+            background-color: rgb(204, 98, 75);
         }
 
         .past {
-            background-color: rgb(234, 234, 234);
+            background-color: rgb(50, 50, 50);
         }
+
+        .track-outer {
+            position: relative;
+            width: 472px;
+            height: 222px;
+            margin: 20px auto;
+        }
+          
+        .track { 
+            border: 10px solid #B27569;
+            transition: all ease-in-out 200ms;
+            position: absolute;
+        }
+
+        .track:hover {
+            border: 10px solid #825046;
+            cursor: pointer;
+        }
+          
+          /*  position changes by 11px every track, size changes by 22, border-rad by 10 */
+          
+        .track1 {
+            height: 200px;
+            width: 450px;
+            border-radius:100px;
+            left:0;
+            top:0;
+        }
+          
+        .track2 {
+            height: 178px;
+            width: 428px;
+            border-radius:90px;
+            left:11px;
+            top:11px;
+        }
+          
+        .track3 {
+            height: 156px;
+            width: 406px;
+            border-radius:80px;
+            left:22px;
+            top:22px;
+        }
+          
+        .track4 {
+            height: 134px;
+            width: 384px;
+            border-radius:70px;
+            left:33px;
+            top:33px;
+        }
+
+        .track5 {
+            height: 112px;
+            width: 362px;
+            border-radius:60px;
+            left:44px;
+            top:44px;
+        }
+
+        button#reset {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%)
+        }
+
     </style>
     <script defer src="main.js"></script>
-    <div class="textarea"></div>
-    <input class="input_box">
-    <label class="timer_label">Time: </label><label class="timer"></label>
-    <label class="wpm_label">Words per Minute: </label><label class="wpm"></label>
+
+    <h1 class="top">TYPE RACER</h1>
+    <div class="main">
+        <div class="time-labels">
+            <label class="stat-labels" id="timer_label">Time: </label><label class="stats" id="timer">0</label>s
+        </div>
+        <div class="wpm-labels">
+            <label class="stat-labels" id="wpm_label">Words per Minute: </label><label class="stats" id="wpm"></label>
+        </div>
+        <div class="acc-labels">
+            <label class="stat-labels" id="acc_label">Accuracy: </label><label class="stats" id="acc"></label>%
+        </div>
+        <div class="textarea"></div>
+        <input class="input_box">
+    </div>
+
+    <div class="track-outer">
+        <div class="track track1"></div>
+        <div class="track track2"></div>
+        <div class="track track3"></div>
+        <div class="track track4"></div>
+        <div class="track track5"></div>
+        <button id="reset">Reset</button>
+    </div>
 
 </body>
 </html>
