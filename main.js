@@ -37,9 +37,10 @@ function main() {
         intervalId = setInterval(() => {
             let delta = Date.now() - start;
             timer.textContent = (delta / 1000).toFixed(1)
-            // console.log(current_words)
-            // console.log((parseInt(timer.textContent)/60))
-            wpm.textContent = current_words / (parseInt(timer.textContent)/60)
+            console.log((((current_chars - 1)/60) / 5).toFixed(1))
+            if (timer.textContent % 1 == 0) {
+                wpm.textContent = parseFloat((((current_chars - 1) * (60 / timer.textContent)) / 5).toFixed(2))
+            }
         }, 100)
     }
 
@@ -94,7 +95,7 @@ function main() {
     function handleInput(evt) {
         console.log(evt)
         if (evt.data){
-            if (evt.data === current_letter) {
+            if (evt.data === current_letter && !current_child.classList.contains('error')) {
                 if (!handleInput.didrun){ 
                     startTimer();
                     handleInput.didrun = true;
@@ -124,11 +125,16 @@ function main() {
                 current_child.classList.add('error')
                 current_errors += 1
                 acc.textContent = Math.round(((current_chars - current_errors) / current_chars) * 100 * 10) / 10
+            } else {
+                console.log('test2')
+                input_box.value = input_box.value.slice(0, -1)
             }
         } else if (evt.data === null && current_child.classList.contains('error')) {
             current_child.removeAttribute('class')
             current_child.className = 'current'
             current_letter = current_child.textContent
+        } else {
+            input_box.value += current_child.previousSibling.textContent;
         }
     }
 }

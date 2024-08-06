@@ -12,8 +12,20 @@
         }
 
         body {
-            background: black;
+            height: 100vh;
+            background-image: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.9)), url("/img/keys.png");
             color: white;
+            background-size: 25%;
+            animation: pan 50s linear infinite;
+        }
+
+        @keyframes pan {
+            0% {
+                background-position: 0% 0%;
+            }
+            100% {
+                background-position: 100% 100%;
+            }
         }
 
         h1.top {
@@ -27,6 +39,7 @@
 
         div.main {
             margin-top: 60px;
+            transition: 0.5s ease-in-out;
         }
 
         div.textarea {
@@ -52,7 +65,7 @@
         }
 
         .past {
-            background-color: rgb(50, 50, 50);
+            background-color: rgb(75, 75, 75);
         }
 
         .track-outer {
@@ -137,7 +150,8 @@
             <label class="stat-labels" id="acc_label">Accuracy: </label><label class="stats" id="acc"></label>%
         </div>
         <div class="textarea"></div>
-        <input class="input_box">
+        <input type="hidden" name="input" value="blablabla">
+        <input name="input" class="input_box">
     </div>
 
     <div class="track-outer">
