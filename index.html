@@ -50,6 +50,12 @@
         input.input_box {
             margin: 10px auto;
             display: block;
+            padding: 5px 0;
+            background-color: rgba(0, 0, 0, 0.2);
+            border: 1px solid #aaa;
+            color: #ddd;
+            text-align: center;
+            font-size: 20px;
         }
 
         div.time-labels, .wpm-labels, .acc-labels{
@@ -68,71 +74,59 @@
             background-color: rgb(75, 75, 75);
         }
 
-        .track-outer {
+        .player-outer {
             position: relative;
             width: 472px;
-            height: 222px;
             margin: 20px auto;
         }
           
-        .track { 
-            border: 10px solid #B27569;
+        .player { 
             transition: all ease-in-out 200ms;
-            position: absolute;
+            position: relative;
+            border: 1px solid #aaa;
+            margin-bottom: 10px;
+            border-radius: 10px;
+            overflow: hidden;
         }
 
-        .track:hover {
-            border: 10px solid #825046;
-            cursor: pointer;
+        .color {
+            border-radius: 10px;
+            transition: all ease-in-out 200ms;
+        }
+                    
+        .red {
+            height: 24px;
+            width: 0%;
+            background-color: red;
         }
           
-          /*  position changes by 11px every track, size changes by 22, border-rad by 10 */
-          
-        .track1 {
-            height: 200px;
-            width: 450px;
-            border-radius:100px;
-            left:0;
-            top:0;
+        .green {
+            height: 24px;
+            width: 0%;
+            background-color: green;
         }
           
-        .track2 {
-            height: 178px;
-            width: 428px;
-            border-radius:90px;
-            left:11px;
-            top:11px;
+        .blue {
+            height: 24px;
+            width: 0%;
+            background-color: blue;
         }
           
-        .track3 {
-            height: 156px;
-            width: 406px;
-            border-radius:80px;
-            left:22px;
-            top:22px;
-        }
-          
-        .track4 {
-            height: 134px;
-            width: 384px;
-            border-radius:70px;
-            left:33px;
-            top:33px;
+        .yellow {
+            height: 24px;
+            width: 0%;
+            background-color: yellow;
         }
 
-        .track5 {
-            height: 112px;
-            width: 362px;
-            border-radius:60px;
-            left:44px;
-            top:44px;
+        .buttons-outer {
+            position: relative;
+            width: 100%;
+            margin: auto;
+            text-align: center;
         }
 
         button#reset {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%)
+            margin-left: 10px;
         }
 
     </style>
@@ -144,7 +138,7 @@
             <label class="stat-labels" id="timer_label">Time: </label><label class="stats" id="timer">0</label>s
         </div>
         <div class="wpm-labels">
-            <label class="stat-labels" id="wpm_label">Words per Minute: </label><label class="stats" id="wpm"></label>
+            <label class="stat-labels" id="wpm_label">Words per Minute: </label><label class="stats" id="wpm"></label>wpm
         </div>
         <div class="acc-labels">
             <label class="stat-labels" id="acc_label">Accuracy: </label><label class="stats" id="acc"></label>%
@@ -154,14 +148,29 @@
         <input name="input" class="input_box">
     </div>
 
-    <div class="track-outer">
-        <div class="track track1"></div>
-        <div class="track track2"></div>
-        <div class="track track3"></div>
-        <div class="track track4"></div>
-        <div class="track track5"></div>
-        <button id="reset">Reset</button>
+    <div class="player-outer">
+        <div class="player1 player">
+            <div class="red color"></div>
+        </div>
+        <div class="player2 player">
+            <div class="green color"></div>
+        </div>
+        <div class="player3 player">
+            <div class="blue color"></div>
+        </div>
+        <div class="player4 player">
+            <div class="yellow color"></div>
+        </div>
     </div>
-
+    <div class="buttons-outer">
+        <label id="difficulty-label">Choose a difficulty:</label>
+        <select id="difficulty">
+            <option value="easy">Easy</option>
+            <option value="medium">Medium</option>
+            <option value="hard">Hard</option>
+            <option value="impossible">Impossible</option>
+        </select>
+        <button id="reset">Reset</button>
+    </div> 
 </body>
 </html>
